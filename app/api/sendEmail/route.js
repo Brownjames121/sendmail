@@ -8,7 +8,7 @@ import Email from "@/emails";
 
 export async function POST(request) {
   try {
-    const { subject, message, to } = await request.json();
+    const { subject, message, to, checkbox } = await request.json();
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -33,14 +33,16 @@ export async function POST(request) {
       subject: subject,
       message: message,
     }));
+
     // Function to send individual emails
     const sendEmail = async (emailDetail) => {
+      const msg = checkbox ? emailHtml : emailDetail.message;
       const mailOptions = {
         from: "devilluffy14@gmail.com",
         to: emailDetail.to,
         subject: emailDetail.subject,
         // html: emailDetail.message,
-        html: emailHtml,
+        html: msg,
       };
 
       try {
@@ -56,14 +58,6 @@ export async function POST(request) {
       sendEmail(emailDetail);
     }
     // end
-    // const mailOption = {
-    //   from: "devilluffy14@gmail.com",
-    //   to: to,
-    //   subject: subject,
-    //   html: message,
-    // };
-
-    // await transporter.sendMail(mailOption);
 
     return NextResponse.json(
       { message: "Email Sent Successfully" },

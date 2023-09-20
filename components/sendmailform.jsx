@@ -12,6 +12,7 @@ import { Icons } from "@/components/icons";
 import * as yup from "yup";
 import { useRouter } from "next/navigation";
 import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import * as XLSX from "xlsx";
 
 export function SendmailForm({ className, ...props }) {
@@ -21,20 +22,23 @@ export function SendmailForm({ className, ...props }) {
     control,
     formState: { errors },
     reset,
+    watch,
   } = useForm({
     resolver: yupResolver(
       yup.object().shape({
         // to: yup.string().email().required(),
         subject: yup.string().required(),
-        message: yup.string().required(),
-        // type: yup.string().required("You need to select a notification type."),
+        // message: yup.string().required(),
       })
     ),
   });
 
+  // const watchShowAge = watch("showAge", false);
+
   const [isLoading, setIsLoading] = React.useState(false);
   const [emailData, setEmailData] = React.useState([]);
-  const [selectedOption, setSelectedOption] = React.useState("fromexcel");
+  const selectedOption = watch("option", "manual");
+  const isChecked = watch("checkbox", false);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -119,10 +123,6 @@ export function SendmailForm({ className, ...props }) {
     // setIsLoading(false);
   }
 
-  // Function to handle radio option change
-  // const handleOptionChange = (value) => {
-  //   setSelectedOption(value);
-  // };
   return (
     <div className={cn("grid gap-6", className)} {...props}>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -130,60 +130,28 @@ export function SendmailForm({ className, ...props }) {
           <div className="grid gap-1">
             {/*  */}
 
-            {/* <Controller
-              name="type"
+            <Controller
+              name="option" // Name attribute of the RadioGroup
               control={control}
-              defaultValue="manual"
+              defaultValue=""
               render={({ field }) => (
                 <RadioGroup
+                  onValueChange={field.onChange}
                   value={field.value}
-                  onChange={(value) => field.onChange(value)}
                   className="grid-cols-2"
                 >
-                  <div className="flex items-center space-x-2 px-3 py-2">
-                    <Controller
-                      name="type"
-                      control={control}
-                      render={({ field }) => (
-                        <RadioGroupItem
-                          value="manual"
-                          checked={field.value === "manual"}
-                          id="r1"
-                          onChange={() => field.onChange("manual")}
-                        />
-                      )}
-                    />
+                  <div className="flex items-center space-x-2  py-2">
+                    <RadioGroupItem value="manual" id="r1" />
                     <label htmlFor="r1">Manual</label>
                   </div>
-                  <div className="flex items-center space-x-2 px-3 py-2">
-                    <Controller
-                      name="type"
-                      control={control}
-                      render={({ field }) => (
-                        <RadioGroupItem
-                          value="fromexcel"
-                          checked={field.value === "fromexcel"}
-                          id="r2"
-                          onChange={() => field.onChange("fromexcel")}
-                        />
-                      )}
-                    />
+                  <div className="flex items-center space-x-2  py-2">
+                    <RadioGroupItem value="fromexcel" id="r2" />
                     <label htmlFor="r2">From Excel</label>
                   </div>
                 </RadioGroup>
               )}
-            /> */}
+            />
             {/*  */}
-            {/* <RadioGroup defaultValue="manual" className="grid-cols-2">
-              <div className="flex items-center space-x-2 px-3 py-2">
-                <RadioGroupItem value="manual" id="r1" />
-                <Label htmlFor="r1">Manual</Label>
-              </div>
-              <div className="flex items-center space-x-2 px-3 py-2">
-                <RadioGroupItem value="fromexcel" id="r2" />
-                <Label htmlFor="r2">From Excel</Label>
-              </div>
-            </RadioGroup> */}
           </div>
           {selectedOption === "manual" ? (
             <div className="grid gap-1">
@@ -222,7 +190,6 @@ export function SendmailForm({ className, ...props }) {
                 disabled={isLoading}
                 onChange={handleFileChange}
                 accept=".xlsx, .xls"
-                //   {...register("to")}
               />
               {errors?.to && (
                 <p className="px-1 text-xs text-red-500">{errors.to.message}</p>
@@ -280,26 +247,53 @@ export function SendmailForm({ className, ...props }) {
               </p>
             )}
           </div>
-          <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="message">
-              Message
-            </Label>
-            <Textarea
-              id="message"
-              placeholder="Type your message here."
-              type="message"
-              autoCapitalize="none"
-              autoComplete=""
-              autoCorrect="off"
-              disabled={isLoading}
-              {...register("message")}
+          <div className="flex items-center space-x-2  py-2">
+            <Controller
+              name="checkbox"
+              control={control}
+              defaultValue={false}
+              render={({ field }) => (
+                <>
+                  <Checkbox
+                    id="emailtemp"
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                  <label
+                    htmlFor="emailtemp"
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    Use Email Templete
+                  </label>
+                </>
+              )}
             />
-            {errors?.message && (
-              <p className="px-1 text-xs text-red-500">
-                {errors.message.message}
-              </p>
-            )}
           </div>
+          {!isChecked && (
+            <div className="grid gap-1">
+              <Label className="sr-only" htmlFor="message">
+                Message
+              </Label>
+              <Textarea
+                id="message"
+                placeholder="Type your message here."
+                type="message"
+                autoCapitalize="none"
+                autoComplete=""
+                autoCorrect="off"
+                disabled={isLoading}
+                // {...register("message")}
+                {...register("message", {
+                  required: true,
+                })}
+              />
+              {errors?.message && (
+                <p className="px-1 text-xs text-red-500">
+                  {errors.message.message}
+                </p>
+              )}
+            </div>
+          )}
 
           <Button disabled={isLoading}>
             {" "}

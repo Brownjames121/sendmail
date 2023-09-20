@@ -61,43 +61,33 @@ export const Email = ({ tips = PropDefaults.tips }) => (
             />
           </Column>
         </Row>
+        <Img
+          src={`https://react-email-demo-ijnnx5hul-resend.vercel.app/static/yelp-header.png`}
+          width={680}
+          alt="codepen"
+        />
+        <Hr style={divider} />
 
         <Section style={content}>
           <Heading as="h2" style={title}>
             Searching for solutions
           </Heading>
+          <Hr style={divider} />
+
           <Text style={paragraph}>
-            With more than 18 million questions, it's possible that someone has
-            already provided a solution to the problem you're facing.{" "}
+            Hey,
+            <br /> Are you looking for low cost Web Design & Web Development or
+            App Development Services? I am reaching out to you to see if you are
+            looking for someone to help you with Website Development, Mobile App
+            Development, E-commerce Solutions, Website Upgrades ,Graphic Design,
+            CRM, ERP, and Software Development. We will be happy to share our
+            work and client references. Looking forward to hearing from you.
+            Please share your phone number and website link suitable time to
+            discuss and we will prepare a special proposal for you. <br />
+            Regards,
           </Text>
 
           <Hr style={divider} />
-
-          <Heading as="h2" style={title}>
-            Use the search bar at the top of the page to find what you need
-          </Heading>
-          <Text style={paragraph}>
-            Here are a few simple search tips to get you started:
-          </Text>
-          <ul>
-            {tips?.map((tip) => (
-              <li key={tip.id}>
-                <Text style={paragraph}>{tip.description}</Text>
-              </li>
-            ))}
-          </ul>
-
-          <Text style={paragraph}>
-            The more information you can put in the search bar, the more likely
-            you will be to either find the answer you need or feel confident
-            that no one else has asked the question before.
-          </Text>
-
-          <Hr style={divider} />
-
-          <Heading as="h2" style={title}>
-            Take a break and read about the worst coder in the world
-          </Heading>
 
           <Section style={buttonContainer}>
             <Link style={button} href="https://stackoverflow.blog/2019/10/22/">
@@ -106,26 +96,6 @@ export const Email = ({ tips = PropDefaults.tips }) => (
           </Section>
         </Section>
       </Container>
-
-      <Section style={footer}>
-        <Text style={footerText}>
-          You're receiving this email because your Stack Overflow activity
-          triggered this tip or reminder.
-        </Text>
-
-        <Link href="/" style={footerLink}>
-          Unsubscribe from emails like this{" "}
-        </Link>
-        <Link href="/" style={footerLink}>
-          Edit email settings{" "}
-        </Link>
-        <Link href="/" style={footerLink}>
-          Contact us
-        </Link>
-        <Link href="/" style={footerLink}>
-          Privacy
-        </Link>
-      </Section>
     </Body>
   </Html>
 );
@@ -164,8 +134,8 @@ const title = {
 };
 
 const paragraph = {
-  fontSize: "15px",
-  lineHeight: "21px",
+  fontSize: "16px",
+  lineHeight: "26px",
   color: "#3c3f44",
 };
 

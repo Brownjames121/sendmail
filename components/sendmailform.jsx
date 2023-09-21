@@ -23,17 +23,16 @@ export function SendmailForm({ className, ...props }) {
     formState: { errors },
     reset,
     watch,
-  } = useForm({
-    resolver: yupResolver(
-      yup.object().shape({
-        // to: yup.string().email().required(),
-        subject: yup.string().required(),
-        // message: yup.string().required(),
-      })
-    ),
-  });
-
-  // const watchShowAge = watch("showAge", false);
+  } = useForm();
+  //   {
+  //   resolver: yupResolver(
+  //     yup.object().shape({
+  //       // to: yup.string().email().required(),
+  //       subject: yup.string().required(),
+  //       // message: yup.string().required(),
+  //     })
+  //   ),
+  // }
 
   const [isLoading, setIsLoading] = React.useState(false);
   const [emailData, setEmailData] = React.useState([]);
@@ -118,8 +117,6 @@ export function SendmailForm({ className, ...props }) {
     } finally {
       setIsLoading(false);
     }
-
-    // setIsLoading(false);
   }
 
   return (
@@ -152,7 +149,66 @@ export function SendmailForm({ className, ...props }) {
             />
             {/*  */}
           </div>
-          {selectedOption === "manual" ? (
+          {/* manual */}
+          {selectedOption === "manual" && (
+            <div className="grid gap-1">
+              <Label className="sr-only" htmlFor="to">
+                To
+              </Label>
+
+              <Input
+                id="manualInput"
+                placeholder="To"
+                type="text"
+                autoCapitalize="none"
+                autoComplete="to"
+                autoCorrect="off"
+                disabled={isLoading}
+                {...register("to", {
+                  required: true,
+                })}
+              />
+
+              {errors?.to && (
+                <p className="px-1 text-xs text-red-500">{errors.to.message}</p>
+              )}
+            </div>
+          )}
+          {selectedOption === "fromexcel" && (
+            <div className="grid gap-1">
+              <Label className="sr-only" htmlFor="to">
+                To
+              </Label>
+
+              <Input
+                id="to"
+                placeholder="To"
+                type="file"
+                autoCapitalize="none"
+                autoComplete="to"
+                autoCorrect="off"
+                disabled={isLoading}
+                onChange={handleFileChange}
+                accept=".xlsx, .xls"
+              />
+              {errors?.to && (
+                <p className="px-1 text-xs text-red-500">{errors.to.message}</p>
+              )}
+
+              <Input
+                id="fromfileto"
+                name="to"
+                type="text"
+                value={emailData}
+                disabled={isLoading}
+                {...register("to", {
+                  required: true,
+                })}
+                readOnly
+              />
+            </div>
+          )}
+          {/* {selectedOption === "manual" ? (
             <div className="grid gap-1">
               <Label className="sr-only" htmlFor="to">
                 To
@@ -194,37 +250,17 @@ export function SendmailForm({ className, ...props }) {
                 <p className="px-1 text-xs text-red-500">{errors.to.message}</p>
               )}
 
-              {emailData.length > 0 && (
-                <Input
-                  id="to"
-                  name="to"
-                  type="text"
-                  value={emailData}
-                  disabled={isLoading}
-                  {...register("to")}
-                  readOnly
-                />
-              )}
-
-              {/* {emailData.length > 0 && (
-                <div className="overflow-x-auto overflow-y-scroll h-[100px] rounded-md border">
-                  <table className="min-w-full">
-                    <tbody className="">
-                      {emailData.map((item, index) => {
-                        return (
-                          <tr key={index}>
-                            <td className=" text-sm font-medium leading-none rounded-md  p-4 whitespace-no-wrap border-b ">
-                              {item}
-                            </td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
-                </div>
-              )} */}
+              <Input
+                id="fromfileto"
+                name="to"
+                type="text"
+                value={emailData}
+                disabled={isLoading}
+                {...register("to")}
+                readOnly
+              />
             </div>
-          )}
+          )} */}
 
           <div className="grid gap-1">
             <Label className="sr-only" htmlFor="subject">
@@ -238,7 +274,9 @@ export function SendmailForm({ className, ...props }) {
               autoComplete="subject"
               autoCorrect="off"
               disabled={isLoading}
-              {...register("subject")}
+              {...register("subject", {
+                required: true,
+              })}
             />
             {errors?.subject && (
               <p className="px-1 text-xs text-red-500">
@@ -281,7 +319,6 @@ export function SendmailForm({ className, ...props }) {
                 autoComplete=""
                 autoCorrect="off"
                 disabled={isLoading}
-                // {...register("message")}
                 {...register("message", {
                   required: true,
                 })}

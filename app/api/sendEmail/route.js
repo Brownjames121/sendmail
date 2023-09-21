@@ -17,7 +17,7 @@ export async function POST(request) {
       secure: true,
       auth: {
         // user: email,
-        // pass,
+        // pass: pass,
         user: "devilluffy14@gmail.com",
         pass: "tmhbtgcbwotsqlju",
       },
@@ -41,7 +41,6 @@ export async function POST(request) {
         from: "devilluffy14@gmail.com",
         to: emailDetail.to,
         subject: emailDetail.subject,
-        // html: emailDetail.message,
         html: msg,
       };
 

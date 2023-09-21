@@ -73,7 +73,6 @@ export function SendmailForm({ className, ...props }) {
       });
 
       if (response.status === 200) {
-        console.log("Emails sent successfully");
         // Handle success (e.g., show a success message)
         toast({
           title: "Success",
@@ -133,7 +132,7 @@ export function SendmailForm({ className, ...props }) {
             <Controller
               name="option" // Name attribute of the RadioGroup
               control={control}
-              defaultValue=""
+              defaultValue="manual"
               render={({ field }) => (
                 <RadioGroup
                   onValueChange={field.onChange}

@@ -3,28 +3,26 @@ import nodemailer from "nodemailer";
 import { render } from "@react-email/render";
 import Email from "@/emails";
 
-// const email = process.env.EMAIL;
-// const pass = process.env.EMAIL_PASS;
+const email = process.env.NEXT_PUBLIC_EMAIL;
+const pass = process.env.NEXT_PUBLIC_EMAIL_PASS;
+const service = process.env.NEXT_PUBLIC_EMAIL_SERVICE;
 
 export async function POST(request) {
   try {
     const { subject, message, to, checkbox } = await request.json();
 
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      service: service,
       host: "smtp.gmail.com",
       port: 465,
       secure: true,
       auth: {
-        // user: email,
-        // pass: pass,
-        user: "devilluffy14@gmail.com",
-        pass: "tmhbtgcbwotsqlju",
+        user: email,
+        pass: pass,
       },
     });
     const emailHtml = render(<Email />);
 
-    // start
     // Define your email details
     const emailAddressesArray = to.split(",");
     // Create an array of email detail objects
@@ -43,7 +41,6 @@ export async function POST(request) {
         subject: emailDetail.subject,
         html: msg,
       };
-
       try {
         await transporter.sendMail(mailOptions);
         console.log(`Email sent to ${emailDetail.to} successfully`);
@@ -56,64 +53,16 @@ export async function POST(request) {
     for (const emailDetail of emailDetails) {
       sendEmail(emailDetail);
     }
-    // end
 
     return NextResponse.json(
       { message: "Email Sent Successfully" },
       { status: 200 }
     );
   } catch (error) {
+    console.error("Error:", error);
     return NextResponse.json(
       { message: "Failed to Send Email" },
       { status: 500 }
     );
   }
 }
-
-// import { NextResponse } from "next/server";
-// import nodemailer from "nodemailer";
-// import { render } from "@react-email/render";
-// import Email from "@/emails";
-
-// // const email = process.env.EMAIL;
-// // const pass = process.env.EMAIL_PASS;
-
-// export async function POST(request) {
-//   try {
-//     const { subject, message, to } = await request.json();
-
-//     const transporter = nodemailer.createTransport({
-//       service: "gmail",
-//       host: "smtp.gmail.com",
-//       port: 465,
-//       secure: true,
-//       auth: {
-//         // user: email,
-//         // pass,
-//         user: "devilluffy14@gmail.com",
-//         pass: "tmhbtgcbwotsqlju",
-//       },
-//     });
-//     const emailHtml = render(<Email />);
-
-//     const mailOption = {
-//       from: "devilluffy14@gmail.com",
-//       to: to,
-
-//       subject: subject,
-//       html: message,
-//     };
-
-//     await transporter.sendMail(mailOption);
-
-//     return NextResponse.json(
-//       { message: "Email Sent Successfully" },
-//       { status: 200 }
-//     );
-//   } catch (error) {
-//     return NextResponse.json(
-//       { message: "Failed to Send Email" },
-//       { status: 500 }
-//     );
-//   }
-// }

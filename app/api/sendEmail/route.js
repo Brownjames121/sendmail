@@ -46,13 +46,17 @@ export async function POST(request) {
         console.log(`Email sent to ${emailDetail.to} successfully`);
       } catch (error) {
         console.error(`Error sending email to ${emailDetail.to}:`, error);
+        throw error;
       }
     };
 
     // Loop through emailDetails array and send emails one by one
-    for (const emailDetail of emailDetails) {
-      sendEmail(emailDetail);
-    }
+    // for (const emailDetail of emailDetails) {
+    //   sendEmail(emailDetail);
+    // }
+
+    // Use Promise.all to send all emails and wait for all promises to resolve
+    await Promise.all(emailDetails.map(sendEmail));
 
     return NextResponse.json(
       { message: "Email Sent Successfully" },

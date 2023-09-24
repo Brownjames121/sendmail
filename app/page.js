@@ -2,6 +2,7 @@ import { SendmailForm } from "@/components/sendmailform";
 import { Icons } from "@/components/icons";
 import { ThemeToggle } from "@/components/theme-toggle";
 
+const email = process.env.NEXT_PUBLIC_EMAIL;
 export default function Home() {
   return (
     <div>
@@ -13,9 +14,7 @@ export default function Home() {
             <h1 className="text-2xl font-semibold tracking-tight">
               Welcome back
             </h1>
-            <p className="text-sm text-muted-foreground">
-              LOrem ipsum sit amit dolor
-            </p>
+            <p className="text-sm text-muted-foreground">{email}</p>
           </div>
           <SendmailForm />
         </div>

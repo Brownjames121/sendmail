@@ -48,10 +48,10 @@ export const Email = ({ tips = PropDefaults.tips }) => (
         <Row style={header}>
           <Column style={headerContent}>
             <Heading style={headerContentTitle}>
-              Find what you want, faster
+              Are you in search of affordable services.
             </Heading>
             <Text style={headerContentSubtitle}>
-              Tips and tricks for searching on Stack Overflow
+              we provide low cost web design, web development.
             </Text>
           </Column>
           <Column style={headerImageContainer}>
@@ -61,16 +61,18 @@ export const Email = ({ tips = PropDefaults.tips }) => (
             />
           </Column>
         </Row>
-        <Img
-          src={`https://react-email-demo-ijnnx5hul-resend.vercel.app/static/yelp-header.png`}
-          width={680}
-          alt="codepen"
-        />
-        <Hr style={divider} />
 
         <Section style={content}>
-          <Heading as="h2" style={title}>
-            Searching for solutions
+          <Heading style={bigHeading}>It's On Its Way.</Heading>
+          <Heading
+            as="h2"
+            style={{
+              fontSize: 26,
+              fontWeight: "bold",
+              textAlign: "center",
+            }}
+          >
+            We noticed a recent login to your Yelp account.
           </Heading>
           <Hr style={divider} />
 
@@ -88,13 +90,67 @@ export const Email = ({ tips = PropDefaults.tips }) => (
           </Text>
 
           <Hr style={divider} />
-
-          <Section style={buttonContainer}>
-            <Link style={button} href="https://stackoverflow.blog/2019/10/22/">
-              I need a break
-            </Link>
-          </Section>
+          <Heading
+            as="h2"
+            style={{
+              fontSize: 26,
+              fontWeight: "bold",
+              textAlign: "center",
+            }}
+          >
+            Our Services
+          </Heading>
         </Section>
+
+        <Row style={section}>
+          <Column style={ideas}>
+            <Section style={yellowCard}>
+              <Img
+                src={`https://react-email-demo-ijnnx5hul-resend.vercel.app/static/yelp-header.png`}
+                width={280}
+                alt="codepen"
+              />
+              🌟
+              <Text style={resourcesTitle}>Website Design</Text>
+            </Section>
+
+            <Section style={yellowCard}>
+              <Img
+                src={`https://react-email-demo-ijnnx5hul-resend.vercel.app/static/yelp-header.png`}
+                width={280}
+                alt="codepen"
+              />
+              🌟
+              <Text style={resourcesTitle}>Mobile App Design</Text>
+            </Section>
+          </Column>
+          <Column style={resources}>
+            <Section style={blueCard}>
+              <Img
+                src={`https://react-email-demo-ijnnx5hul-resend.vercel.app/static/yelp-header.png`}
+                width={280}
+                alt="codepen"
+              />
+              🌟
+              <Text style={resourcesTitle}>Graphic & Logo Design</Text>
+            </Section>
+
+            <Section style={blueCard}>
+              <Img
+                src={`https://react-email-demo-ijnnx5hul-resend.vercel.app/static/yelp-header.png`}
+                width={280}
+                alt="codepen"
+              />
+              🌟
+              <Text style={resourcesTitle}>Motion Design</Text>
+            </Section>
+          </Column>
+        </Row>
+        {/* <Section style={buttonContainer}>
+            <Link style={button} href="">
+              button
+            </Link>
+          </Section> */}
       </Container>
     </Body>
   </Html>
@@ -230,135 +286,73 @@ const footerHeart = {
   margin: "0 0 32px 0",
 };
 
-// import {
-//   Body,
-//   Button,
-//   Container,
-//   Column,
-//   Head,
-//   Heading,
-//   Hr,
-//   Html,
-//   Img,
-//   Link,
-//   Preview,
-//   Row,
-//   Section,
-//   Tailwind,
-//   Text,
-// } from "@react-email/components";
-// import * as React from "react";
+const yellowSection = {
+  background: "#f5d247",
+  padding: "30px",
+  fontSize: "18px",
+  lineHeight: "1.5",
+};
+const blueLink = {
+  color: "#15c",
+  cursor: "pointer",
+};
+const section = {
+  margin: "0",
+  background: "#fff",
+  padding: "0 24px",
+};
+const resourcesTitle = {
+  fontWeight: "900",
+  lineHeight: "1.1",
+  // marginTop: "-40px",
+  fontSize: "18px",
+};
 
-// const baseUrl = process.env.VERCEL_URL
-//   ? `https://${process.env.VERCEL_URL}`
-//   : "";
+const ideasTitle = {
+  fontWeight: "900",
+  lineHeight: "1.1",
+  fontSize: "18px",
+};
 
-// export const Email = ({
-//   username = "zenorocha",
-//   userImage = `${baseUrl}/static/vercel-user.png`,
-//   invitedByUsername = "bukinoshita",
-//   invitedByEmail = "bukinoshita@example.com",
-//   teamName = "My Project",
-//   teamImage = `${baseUrl}/static/vercel-team.png`,
-//   inviteLink = "https://vercel.com/teams/invite/foo",
-//   inviteFromIp = "204.13.186.218",
-//   inviteFromLocation = "São Paulo, Brazil",
-// }) => {
-//   const previewText = `Join ${invitedByUsername} on Vercel`;
+const ideas = {
+  width: "50%",
+  paddingRight: "10px",
+};
 
-//   return (
-//     <Html>
-//       <Head />
-//       <Preview>{previewText}</Preview>
-//       <Tailwind>
-//         <Body className="bg-white my-auto mx-auto font-sans">
-//           <Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] w-[465px]">
-//             <Section className="mt-[32px]">
-//               <Img
-//                 src={`${baseUrl}/static/vercel-logo.png`}
-//                 width="40"
-//                 height="37"
-//                 alt="Vercel"
-//                 className="my-0 mx-auto"
-//               />
-//             </Section>
-//             <Heading className="text-black text-[24px] font-normal text-center p-0 my-[30px] mx-0">
-//               Join <strong>{teamName}</strong> on <strong>Vercel</strong>
-//             </Heading>
-//             <Text className="text-black text-[14px] leading-[24px]">
-//               Hello {username},
-//             </Text>
-//             <Text className="text-black text-[14px] leading-[24px]">
-//               <strong>bukinoshita</strong> (
-//               <Link
-//                 href={`mailto:${invitedByEmail}`}
-//                 className="text-blue-600 no-underline"
-//               >
-//                 {invitedByEmail}
-//               </Link>
-//               ) has invited you to the <strong>{teamName}</strong> team on{" "}
-//               <strong>Vercel</strong>.
-//             </Text>
-//             <Section>
-//               <Row>
-//                 <Column align="right">
-//                   <Img
-//                     className="rounded-full"
-//                     src={userImage}
-//                     width="64"
-//                     height="64"
-//                   />
-//                 </Column>
-//                 <Column align="center">
-//                   <Img
-//                     src={`${baseUrl}/static/vercel-arrow.png`}
-//                     width="12"
-//                     height="9"
-//                     alt="invited you to"
-//                   />
-//                 </Column>
-//                 <Column align="left">
-//                   <Img
-//                     className="rounded-full"
-//                     src={teamImage}
-//                     width="64"
-//                     height="64"
-//                   />
-//                 </Column>
-//               </Row>
-//             </Section>
-//             <Section className="text-center mt-[32px] mb-[32px]">
-//               <Button
-//                 pX={20}
-//                 pY={12}
-//                 className="bg-[#000000] rounded text-white text-[12px] font-semibold no-underline text-center"
-//                 href={inviteLink}
-//               >
-//                 Join the team
-//               </Button>
-//             </Section>
-//             <Text className="text-black text-[14px] leading-[24px]">
-//               or copy and paste this URL into your browser:{" "}
-//               <Link href={inviteLink} className="text-blue-600 no-underline">
-//                 {inviteLink}
-//               </Link>
-//             </Text>
-//             <Hr className="border border-solid border-[#eaeaea] my-[26px] mx-0 w-full" />
-//             <Text className="text-[#666666] text-[12px] leading-[24px]">
-//               This invitation was intended for{" "}
-//               <span className="text-black">{username} </span>.This invite was
-//               sent from <span className="text-black">{inviteFromIp}</span>{" "}
-//               located in{" "}
-//               <span className="text-black">{inviteFromLocation}</span>. If you
-//               were not expecting this invitation, you can ignore this email. If
-//               you are concerned about your account's safety, please reply to
-//               this email to get in touch with us.
-//             </Text>
-//           </Container>
-//         </Body>
-//       </Tailwind>
-//     </Html>
-//   );
-// };
+const resources = {
+  width: "50%",
+  paddingLeft: "10px",
+};
 
-// export default Email;
+const card = {
+  padding: "20px",
+  margin: "0 0 20px 0",
+  borderRadius: "10px",
+  fontSize: "36px",
+  textAlign: "center",
+};
+
+const yellowCard = {
+  ...card,
+  background: "#fff4c8",
+  border: "1px solid #f4d247",
+};
+
+const blueCard = {
+  ...card,
+  background: "#d9f6ff",
+  border: "1px solid #92bfd0",
+};
+
+const textCard = {
+  fontSize: "13px",
+  textAlign: "left",
+};
+
+const bigHeading = {
+  fontSize: "32px",
+  lineHeight: "1.3",
+  fontWeight: "700",
+  textAlign: "center",
+  letterSpacing: "-1px",
+};

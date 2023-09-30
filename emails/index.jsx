@@ -63,7 +63,7 @@ export const Email = ({ tips = PropDefaults.tips }) => (
         </Row>
 
         <Section style={content}>
-          <Heading style={bigHeading}>It's On Its Way.</Heading>
+          {/* <Heading style={bigHeading}>It's On Its Way.</Heading>
           <Heading
             as="h2"
             style={{
@@ -72,22 +72,68 @@ export const Email = ({ tips = PropDefaults.tips }) => (
               textAlign: "center",
             }}
           >
-            We noticed a recent login to your Yelp account.
-          </Heading>
-          <Hr style={divider} />
+            Lorem ipsum sit amet dolor.
+          </Heading> */}
+          {/* <Hr style={divider} /> */}
 
           <Text style={paragraph}>
             Hey,
             <br /> Are you looking for low cost Web Design & Web Development or
-            App Development Services? I am reaching out to you to see if you are
-            looking for someone to help you with Website Development, Mobile App
-            Development, E-commerce Solutions, Website Upgrades ,Graphic Design,
-            CRM, ERP, and Software Development. We will be happy to share our
-            work and client references. Looking forward to hearing from you.
-            Please share your phone number and website link suitable time to
-            discuss and we will prepare a special proposal for you. <br />
-            Regards,
+            App Development and SEO Services? I am reaching out to you to see if
+            you are looking for someone to help you with
           </Text>
+          <ul>
+            <li>
+              <Text style={paragraph}> Website Development</Text>
+            </li>
+            <li>
+              <Text style={paragraph}> Mobile App Development</Text>
+            </li>
+            <li>
+              <Text style={paragraph}> E-commerce Solutions</Text>
+            </li>
+            <li>
+              <Text style={paragraph}> Website Upgrades</Text>
+            </li>
+            <li>
+              <Text style={paragraph}> Graphic Design</Text>
+            </li>
+            <li>
+              <Text style={paragraph}> CRM, ERP</Text>
+            </li>
+            <li>
+              <Text style={paragraph}>
+                Full SEO package (with plan and activities)
+              </Text>
+            </li>
+            <li>
+              {" "}
+              <Text style={paragraph}> PPC (pay per click)</Text>
+            </li>
+            <li>
+              <Text style={paragraph}>
+                SMO – (Facebook, Twitter, LinkedIn, YouTube & Myspace Marketing,
+                etc.) and Software Development.
+              </Text>
+            </li>
+          </ul>
+          <Text style={paragraph}>
+            {" "}
+            We will be happy to share our work and client references. Looking
+            forward to hearing from you. Please share your phone number and
+            website link suitable time to discuss and we will prepare a special
+            proposal for you. <br />
+            Regards,
+            <br />
+            william,
+            <br />
+            williamshatner.websolution@gmail.com
+          </Text>
+          {/* <Text style={paragraph}>
+            william,
+            <br />
+            williamshatner.websolution@gmail.com
+          </Text> */}
 
           <Hr style={divider} />
           <Heading

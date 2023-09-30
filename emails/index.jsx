@@ -19,27 +19,7 @@ const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "";
 
-const PropDefaults = {
-  tips: [
-    {
-      id: 1,
-      description:
-        'To find a specific phrase, enter it in quotes: "local storage"',
-    },
-    {
-      id: 1,
-      description:
-        "To search within specific tag(s), enter them in square brackets: [javascript]",
-    },
-    {
-      id: 1,
-      description:
-        'Combine them to get even more precise results - [javascript] "local storage" searches for the phrase “local storage” in questions that have the [javascript] tag',
-    },
-  ],
-};
-
-export const Email = ({ tips = PropDefaults.tips }) => (
+export const Email = () => (
   <Html>
     <Head />
     <Preview>Stack overflow tips for searching</Preview>
@@ -122,7 +102,10 @@ export const Email = ({ tips = PropDefaults.tips }) => (
             We will be happy to share our work and client references. Looking
             forward to hearing from you. Please share your phone number and
             website link suitable time to discuss and we will prepare a special
-            proposal for you. <br />
+            proposal for you.
+          </Text>
+          <Text style={paragraph}>
+            {" "}
             Regards,
             <br />
             william,
